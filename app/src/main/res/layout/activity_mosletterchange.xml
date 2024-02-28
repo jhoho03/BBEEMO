@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/main_top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@drawable/margin_edge_top" >
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:id="@+id/morsechange"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="24dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_backarrow"
+            android:visibility="visible"
+
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="번  역"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+        <ImageButton
+            android:id="@+id/trans_dialog"
+            android:layout_width="16dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/morse_trans_table"
+            android:clickable="true"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/main_mid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical"
+        android:background="#F0F5F9"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+
+            <Button
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF7400"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="30dp"
+                android:text="한글"
+                android:id="@+id/choicelag"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:textColor="#FFFFFF"
+                />
+
+
+
+
+            <Button
+
+                android:textColor="#FFFFFF"
+
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF7400"
+
+                android:id="@+id/clear"
+                android:layout_marginLeft="2dp"
+                android:text="clear"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"/>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/answer"
+            android:layout_gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+
+
+
+            android:textSize="20dp"
+
+            android:gravity="start"
+
+            android:textColor="#000"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+
+            android:background="@drawable/border"
+            android:elevation="2dp"
+            android:hint="한글로 번역할 모스부호를 입력하세요"
+
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/korout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_marginTop="15dp"
+
+            android:padding="10dp"
+
+
+            android:layout_marginLeft="30dp"
+
+
+            android:background="@drawable/border"
+            android:textStyle="bold"
+            android:layout_marginRight="30dp"
+            android:hint="  번역결과"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+
+                >
+
+                <Button
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+
+                    android:backgroundTint="#69DCE3"
+                    android:layout_width="125dp"
+                    android:layout_height="60dp"
+                    android:text="·"
+                    android:textSize="45dp"
+                    android:id="@+id/button1"
+                    />
+                <Button
+
+                    android:layout_width="125dp"
+                    android:layout_marginLeft="11dp"
+                    android:layout_height="60dp"
+                    android:text="-"
+                    android:textSize="45dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+
+                    android:backgroundTint="#69DCE3"
+                    android:id="@+id/button2"
+                    />
+
+                <ImageButton
+                    android:id="@+id/button3"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:backgroundTint="#69DCE3"
+
+                    android:layout_marginLeft="11dp"
+
+                    android:src="@drawable/iconmonstr_backspace_lined" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="58dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:text="스페이스"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="124dp"
+                    android:layout_height="60dp"
+
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+
+                    android:backgroundTint="#69DCE3"
+                    android:id="@+id/button4"
+                    />
+                <Button
+                    android:layout_width="125dp"
+                    android:layout_height="60dp"
+                    android:text="/"
+                    android:layout_marginLeft="11dp"
+                    android:textSize="45dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+
+                    android:backgroundTint="#69DCE3"
+                    android:id="@+id/button5"
+                    />
+                <Button
+                    android:layout_width="90dp"
+                    android:layout_height="60dp"
+
+                    android:textSize="45dp"
+                    android:text="^"
+                    android:layout_marginLeft="11dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+
+                    android:backgroundTint="#69DCE3"
+                    android:id="@+id/button6"
+                    />
+
+
+            </LinearLayout>
+
+            <!--        <Button-->
+            <!--            android:layout_marginTop="150dp"-->
+            <!--            android:layout_marginLeft="25dp"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:text="종료"-->
+            <!--            android:visibility="invisible"-->
+            <!--            android:clickable="false"-->
+            <!--            android:backgroundTint="#FF7400"-->
+            <!--            android:id="@+id/button7"-->
+            <!--            />-->
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/margin_edge_bottom"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/ic_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_translate"
+            android:background="#FFFFFF"
+            />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+
+        <ImageButton
+            android:id="@+id/ic_bbeemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_beemo_unselect"
+            android:background="#FFFFFF"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/ic_problemsolving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_problemsolving_unselect"
+            android:background="#FFFFFF"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+</LinearLayout>

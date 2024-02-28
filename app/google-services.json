@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "355795519003",
+    "project_id": "bbeemo-991e4",
+    "storage_bucket": "bbeemo-991e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355795519003:android:dbe91d9410de3bad57dabe",
+        "android_client_info": {
+          "package_name": "com.example.bbeemo_final"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCXE82xJ_1ng-DEbK1S7OgCdsEiSKCL9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

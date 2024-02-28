@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/main_top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@drawable/margin_edge_top" >
+
+
+        <ImageButton
+            android:id="@+id/dialog"
+            android:layout_width="16dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/morse_trans_table"
+            android:clickable="false"
+            android:visibility="invisible" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="번  역"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+        <ImageButton
+            android:id="@+id/trans_dialog"
+            android:layout_width="16dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/morse_trans_table"
+            android:clickable="false"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/main_mid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical"
+        android:background="#F0F5F9"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+
+
+
+
+        <!--            android:background="#ffffff"-->
+
+<!--        hint 패딩적용 = mainactivity에서 적용해야함-->
+<!--        테두리 둥글게 = android:background="@drawable/border"-->
+<!--        xml 파일 만들어서 적용시킴-->
+
+        <EditText
+            android:id="@+id/etinput"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:layout_below="@+id/tvgfg"
+            android:layout_marginTop="30dp"
+            android:gravity="start"
+            android:textColor="#000000"
+            android:textColorHint="#D9D9D9"
+
+
+            android:background="@drawable/border"
+            android:elevation="2dp"
+
+            android:hint="번역할 영어를 입력하세요"
+
+            />
+
+        <!--edit text to accept the input from the user-->
+        <LinearLayout
+
+            android:id="@+id/llout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/etinput"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:id="@+id/engbtnencode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:backgroundTint="#FF7400"
+
+                    android:padding="13dp"
+                    android:text="영어 번역"
+                    android:textColor="#fff"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/korbtnencode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:backgroundTint="#FF7400"
+
+                    android:visibility="invisible"
+                    android:enabled="false"
+
+                    android:padding="13dp"
+                    android:text="한글 번역"
+                    android:textColor="#fff"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    />
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/btnclear"
+                android:backgroundTint="#FF7400"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:padding="13dp"
+                android:text="clear"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/changebutton"
+                android:backgroundTint="#FF7400"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="한영전환"
+                android:textColor="#fff"
+
+                />
+
+        </LinearLayout>
+
+        <!--edit text to display output to the user.
+            Edit text is used since the user can copy the
+            text easily if he wants to
+            복붙 쉽게하려면 etoutput 를 edittext로 바꿔라/....-->
+
+
+
+        <ImageButton
+            android:id="@+id/letterchange"
+
+            android:layout_marginTop="110dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bbeemoimg"
+            android:background="#FFFFFF"
+            android:layout_gravity="center_horizontal"
+
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/margin_edge_bottom"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/ic_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_translate"
+            android:background="#FFFFFF"
+            />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+
+        <ImageButton
+            android:id="@+id/ic_bbeemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_beemo_unselect"
+            android:background="#FFFFFF"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/ic_problemsolving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_problemsolving_unselect"
+            android:background="#FFFFFF"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
