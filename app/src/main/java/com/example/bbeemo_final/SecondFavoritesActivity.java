@@ -18,11 +18,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableEmitter;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class SecondFavoritesActivity extends AppCompatActivity {
 
 
     private String resultString;
     private TextView morseresult;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
 
@@ -138,8 +145,35 @@ public class SecondFavoritesActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (beepCheckBox.isChecked() || vibeCheckBox.isChecked() || lightCheckBox.isChecked()) {
-                        AllplayMorseCode(resultString);
+                        // Prevent multiple clicks from starting multiple threads
+                        compositeDisposable.clear();
+                        compositeDisposable.add(
+                                Completable.create(emitter -> {
+                                    AllplayMorseCode(resultString, emitter);
+                                    emitter.onComplete();
+                                })
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(
+                                        () -> {
+                                            // onComplete: playing finished successfully
+                                        },
+                                        error -> {
+                                            // onError: handle error
+                                            error.printStackTrace();
+                                        }
+                                )
+                        );
                     }
+                }
+            });
+
+            // stop 버튼 추가
+            Button StopButton = findViewById(R.id.stop);
+            StopButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    stopPlaying();
                 }
             });
 
@@ -179,60 +213,79 @@ public class SecondFavoritesActivity extends AppCompatActivity {
         }
     }
 
+    private void stopPlaying() {
+        // Cancel the RxJava subscription
+        compositeDisposable.clear();
+
+        // Turn off flash if it's on
+        flashLightOff();
+
+        // Stop media players if playing
+        if (dotPlayer != null && dotPlayer.isPlaying()) {
+            dotPlayer.pause();
+            dotPlayer.seekTo(0);
+        }
+        if (dashPlayer != null && dashPlayer.isPlaying()) {
+            dashPlayer.pause();
+            dashPlayer.seekTo(0);
+        }
+        if (spacePlayer != null && spacePlayer.isPlaying()) {
+            spacePlayer.pause();
+            spacePlayer.seekTo(0);
+        }
+
+        // Stop vibration
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            vibrator.cancel();
+        }
+    }
+
 
     // alll 실행 함수
-    private void AllplayMorseCode(String morseCode) {
+    private void AllplayMorseCode(String morseCode, CompletableEmitter emitter) {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-        for (int i = 0; i < morseCode.length()  ; i++) {
+        for (int i = 0; i < morseCode.length(); i++) {
+            if (emitter.isDisposed()) {
+                return; // Stop execution if disposed
+            }
+
             char morseChar = morseCode.charAt(i);
             if (morseChar == '.') {
                 if(beepCheckBox.isChecked()){
                     playDot();
-                    sleep(90);
+                    sleep(90, emitter);
                 }
                 if (vibeCheckBox.isChecked()){
                     vibrator.vibrate(90);
-                    sleep(90);
+                    sleep(90, emitter);
                 }
                 if (lightCheckBox.isChecked()){
                     flashLightOn();
-                    sleep(30);
+                    sleep(30, emitter);
                     flashLightOff();
                 }
-                try {
-                    Thread.sleep(90); // 500 milliseconds delay for space
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep(90, emitter); // 500 milliseconds delay for space
             } else if (morseChar == '-') {
                 if(beepCheckBox.isChecked()){
                     playDash();
-                    sleep(150);
+                    sleep(150, emitter);
                 }
                 if (vibeCheckBox.isChecked()) {
                     vibrator.vibrate(150);
-                    sleep(150);
+                    sleep(150, emitter);
                 }
                 if (lightCheckBox.isChecked()) {
                     flashLightOn();
-                    sleep(150);
+                    sleep(150, emitter);
                     flashLightOff();
                 }
-                try {
-                    Thread.sleep(150); // 500 milliseconds delay for space
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+                sleep(150, emitter); // 500 milliseconds delay for space
 
             } else if (morseChar == ' ') {
                 // Add a delay for spaces (adjust the duration as needed)
-                try {
-                    Thread.sleep(300); // 500 milliseconds delay for space
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep(300, emitter); // 500 milliseconds delay for space
             }
         }
     }
@@ -352,7 +405,7 @@ public class SecondFavoritesActivity extends AppCompatActivity {
     }
 
 
-    //플래시 함수
+    // 기존 플래시 함수
     public void flashLightOn() {
         mFlashOn = true;
         try {
@@ -369,10 +422,28 @@ public class SecondFavoritesActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     public void sleep(int time){
         try{
             Thread.sleep(time);
         } catch (InterruptedException e){
+        }
+    }
+
+    // RxJava emitter를 중지 확인용으로 전달받는 sleep 함수
+    public void sleep(int time, CompletableEmitter emitter){
+        int interval = 10;
+        int elapsed = 0;
+        try {
+            while (elapsed < time) {
+                if (emitter.isDisposed()) {
+                    return; // Stop sleeping and exit if disposed
+                }
+                Thread.sleep(interval);
+                elapsed += interval;
+            }
+        } catch (InterruptedException e) {
+            // Interrupted
         }
     }
 
