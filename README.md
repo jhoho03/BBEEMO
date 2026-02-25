@@ -18,7 +18,7 @@ BBEEMO는 사용자가 입력한 한국어 및 영문 텍스트를 모스 부호
 
 * **텍스트 ↔ 모스 부호 양방향 번역:** 한글 및 영문 텍스트를 모스 부호 알고리즘 규칙에 맞춰 빠르고 정확하게 변환합니다.
 * **다중 감각 재생 시스템 (Multi-sensory Playback):**
-  * `MediaPlayer API`: 모스 부호의 단점(Dot)과 장점(Dash)에 맞는 커스텀 사운드 재생
+  * `MediaPlayer API`: 모스 부호의 .(Dot)과 _(Dash)에 맞는 커스텀 사운드 재생
   * `Vibrator API`: 모스 부호 패턴에 따른 진동 인터페이스 제공
   * `Camera2 API`: 손전등(Torch) 플래시를 이용해 빛 패턴으로 재생
 
