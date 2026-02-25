@@ -44,8 +44,8 @@ BBEEMO는 사용자가 입력한 한국어 및 영문 텍스트를 모스 부호
 * **해결 방안 및 과정:**
   1. 백그라운드 스레드에서 모스 부호를 재생하기 위해 **RxJava를 도입**했습니다.
   2. 기존 재생 기능을 `Completable` 스트림 모나드로 분리하여 `Schedulers.io()` (백그라운드 스레드)에서 실행시켜 메인 스레드 블로킹을 해결했습니다.
-  3. 가장 중요한 즉시 정지 기능은 **`CompositeDisposable`** 객체를 통해 풀었습니다. 사용자가 정지 버튼을 누르면 즉시 구독을 해제(`clear()`)합니다.
-  4. 특히 단순히 큰 시간 단위로 [sleep()](cci:1://file:///c:/Users/jhoho/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/ANTIGRAVITY.FILE/BBEEMO_final/BBEEMO/app/src/main/java/com/example/bbeemo_final/SecondFavoritesActivity.java:432:4-447:5)하지 않고, 시간을 10ms 단위로 분할하여 구독 해제(`isDisposed()`) 여부를 지속적으로 검사하는 백그라운드 커스텀 루프를 고안하여 **사용자가 정지 버튼을 누르는 즉시(0.01초 이내) 재생이 강단**되도록 극복했습니다.
+  3. 정지 기능은 `CompositeDisposable` 객체를 통해 구현했습니다. 사용자가 정지 버튼을 누르면 즉시 구독을 해제(`clear()`)합니다.
+
 
 <br>
 
